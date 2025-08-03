@@ -10,7 +10,8 @@ import (
 	"url-shortener/internal/http-server/handlers/url/save"
 	"url-shortener/internal/http-server/handlers/url/delete"
 	"url-shortener/internal/http-server/handlers/redirect"
-	"url-shortener/internal/storage/sqlite"
+	// "url-shortener/internal/storage/sqlite"
+	"url-shortener/internal/storage/postgres"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -20,20 +21,16 @@ const (
 	envLocal = "local"
 	envDev   = "dev" 
 	envProd  = "prod"
-
-	googleLink = "https://google.com/"
-	googleAlias = "google"
 )
 
 func main() {
 	cfg := config.MustLoad()
 	log := setupLogger(cfg.Env)
 
-	// log = log.With(slog.String("env", cfg.Env))
 	log.Info("starting url-shortener")
 	log.Debug("debug messages are enabled")
 
-	storage, err := sqlite.New(cfg.StoragePath)
+	storage, err := postgres.New(cfg.Postgres)
 	if err != nil {
 		log.Error("failed to init storage:", slog.Any("error", err))
 		os.Exit(1)

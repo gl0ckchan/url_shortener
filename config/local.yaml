@@ -1,5 +1,27 @@
 env: "local" # local, dev, prod
-storage_path: "./storage/storage.db"
+
+postgres:
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  password: "postgres"
+  dbname: "shortener"
+  sslmode: "disable" 
+  max_open_conns: 25
+  max_idle_conns: 5
+  conn_max_lifetime: "5m"
+
+# redis:
+#   address: "localhost:6379"
+#   password: "" 
+#   db: 0
+#   pool_size: 10
+#   min_idle_conns: 2
+#   max_retries: 3
+#   dial_timeout: "5s"
+#   read_timeout: "3s"
+#   write_timeout: "3s"
+
 http_server: 
   address: "0.0.0.0:6969"
   timeout: 4s
