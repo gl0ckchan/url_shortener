@@ -10,7 +10,6 @@ import (
 	"url-shortener/internal/http-server/handlers/url/save"
 	"url-shortener/internal/http-server/handlers/url/delete"
 	"url-shortener/internal/http-server/handlers/redirect"
-	// "url-shortener/internal/storage/sqlite"
 	"url-shortener/internal/storage/postgres"
 
 	"github.com/go-chi/chi/v5"
